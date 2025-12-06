@@ -1,7 +1,6 @@
-package com.RusGruz.JobAggregator;
+package com.RusGruz.JobAggregator.Scraper;
 
-import com.RusGruz.JobAggregator.FunInterfaces.JobScraperLinkedin;
-import com.RusGruz.JobAggregator.Models.JobModel;
+import com.RusGruz.JobAggregator.Models.Job;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,8 +20,8 @@ import java.util.List;
 @Component
 public class LinkedInJobScraper implements JobScraperLinkedin {
 
-    public List<JobModel> scrapeJobs(String keyword, String location) {
-        List<JobModel> jobs = new ArrayList<>();
+    public List<Job> scrapeJobs(String keyword, String location) {
+        List<Job> jobs = new ArrayList<>();
 
         ChromeOptions opts = new ChromeOptions();
         opts.addArguments("--headless");
@@ -67,7 +66,7 @@ public class LinkedInJobScraper implements JobScraperLinkedin {
                     js.executeScript("arguments[0].scrollIntoView(true);", card);
                     Thread.sleep(500);
 
-                    JobModel job = new JobModel();
+                    Job job = new Job();
 
                     // Try multiple selectors for title
                     String title = extractText(card, new String[]{

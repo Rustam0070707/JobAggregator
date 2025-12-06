@@ -1,7 +1,6 @@
-package com.RusGruz.JobAggregator;
+package com.RusGruz.JobAggregator.Scraper;
 
-import com.RusGruz.JobAggregator.FunInterfaces.JobScraper;
-import com.RusGruz.JobAggregator.Models.JobModel;
+import com.RusGruz.JobAggregator.Models.Job;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -16,8 +15,8 @@ public class HhUzScraper implements JobScraper {
     private static final String API_URL  = "https://api.hh.uz/vacancies?area=2758&text=Java&per_page=20";
 
     @Override
-    public List<JobModel> scrapeJobs() {
-        List<JobModel> jobs = new ArrayList<>();
+    public List<Job> scrapeJobs() {
+        List<Job> jobs = new ArrayList<>();
         RestTemplate restTemplate  = new RestTemplate();
 
         try{
@@ -28,7 +27,7 @@ public class HhUzScraper implements JobScraper {
             for(int i = 0; i < items.length(); i++){
                 JSONObject item  = items.getJSONObject(i);
 
-                JobModel job = new JobModel();
+                Job job = new Job();
                 job.setTitle(item.getString("name"));
                 job.setCompany(item.getJSONObject("employer").getString("name"));
                 job.setUrl(item.getString("alternate_url"));

@@ -1,7 +1,6 @@
-package com.RusGruz.JobAggregator;
+package com.RusGruz.JobAggregator.Scraper;
 
-import com.RusGruz.JobAggregator.FunInterfaces.JobScraper;
-import com.RusGruz.JobAggregator.Models.JobModel;
+import com.RusGruz.JobAggregator.Models.Job;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,8 +17,8 @@ public class RemoteScraper implements JobScraper {
     private static final String URL = "https://remoteok.com/remote-java-jobs";
 
     @Override
-    public List<JobModel> scrapeJobs() {
-        List<JobModel> jobs = new ArrayList<>();
+    public List<Job> scrapeJobs() {
+        List<Job> jobs = new ArrayList<>();
         WebDriver driver = null;
 
         try {
@@ -81,7 +80,7 @@ public class RemoteScraper implements JobScraper {
                     }
 
                     if (!title.isEmpty()) {
-                        JobModel job = new JobModel();
+                        Job job = new Job();
                         job.setTitle(title);
                         job.setCompany(company);
                         job.setLocation(location);
